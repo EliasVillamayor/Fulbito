@@ -177,50 +177,6 @@ def tournament_detail(request, pk):
         tournament.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
     
-
-#
-#
-#METODOS DE PAYMENT
-#
-#
-@api_view(['GET'])
-def get_all_payments(request):
-    payments = Payment.objects.all()
-    payments_serialized = PaymentSerializer(payments, many=True)
-    return Response(payments_serialized.data)
-
-@api_view(['POST'])
-def create_payment(request):
-    serializer = PaymentSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-@api_view(['GET', 'PUT', 'DELETE'])
-def payment_detail(request, pk):
-    try:
-        payment = Payment.objects.get(pk=pk)
-    except Payment.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-    
-    if request.method == 'GET':
-        payment_serialized = PaymentSerializer(payment)
-        return Response(payment_serialized.data)
-    
-
-    elif request.method == 'PUT':
-        payment_serialized = PaymentSerializer(payment, data=request.data)
-        if payment_serialized.is_valid():
-            payment_serialized.save()
-            return Response(payment_serialized.data)
-        return Response(payment_serialized.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-    if request.method == 'DELETE':
-        payment.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-    
-
 #
 #
 #METODOS DE TEAM
