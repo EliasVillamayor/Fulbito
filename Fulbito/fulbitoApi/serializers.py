@@ -31,3 +31,10 @@ class MatchSerializer(serializers.ModelSerializer):
     class Meta:
         model = Match
         fields = ('__all__')
+
+class FrequentClientSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FrequentClient
+        fields = ('__all__')
+
+    

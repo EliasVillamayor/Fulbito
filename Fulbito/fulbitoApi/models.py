@@ -13,8 +13,6 @@ class Payment(models.Model):
     date = models.DateTimeField(auto_now_add=True, null=False)
     method = models.CharField(choices=[(pt.value, pt.name) for pt in PaymentType], null=False, max_length=100)
       
-
-   
 class Team(models.Model):
     name = models.CharField(max_length=100,null=False)
     captain = models.CharField(max_length=50)
@@ -38,6 +36,11 @@ class Match(models.Model):
     team_one = models.ForeignKey(Team, on_delete=models.CASCADE,null=False, related_name='match_team_one')
     team_two = models.ForeignKey(Team, on_delete=models.CASCADE,null=False,related_name='match_team_two')
     winner = models.ForeignKey(Team, on_delete=models.CASCADE,null=False,related_name='winner')
+
+class FrequentClient(models.Model):
+    name = models.CharField(max_length=50, null=False)
+    email = models.EmailField(null=False)
+    phone_number = models.CharField(max_length=20, null=False)
 
 
 

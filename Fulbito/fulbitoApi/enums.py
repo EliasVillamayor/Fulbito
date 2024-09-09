@@ -22,7 +22,6 @@ class ReserveStatus(Enum):
 
 class PaymentType(Enum):
     CASH = 'Efectivo'
-    CARD = 'Tarjeta de crédito'
     TRANSFER = 'Transferencia'
 
 class TournamentStatus(Enum):
