@@ -262,3 +262,48 @@ def match_detail(request, pk):
     if request.method == 'DELETE':
         match.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+    
+
+
+#
+#
+#METODOS DE Cliente
+#
+#
+@api_view(['GET'])
+def get_all_clients(request):
+    clients = FrequentClient.objects.all()
+    clients_serialized = FrequentClientSerializer(clients, many=True)
+    return Response(clients_serialized.data)
+
+@api_view(['POST'])
+def create_client(request):
+    serializer = FrequentClientSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def client_detail(request, pk):
+    try:
+        client = Pitch.objects.get(pk=pk)
+    except FrequentClient.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    if request.method == 'GET':
+        client_serialized = FrequentClientSerializer(client)
+        return Response(client_serialized.data)
+    
+
+    elif request.method == 'PUT':
+        client_serialized = FrequentClientSerializer(client, data=request.data)
+        if client_serialized.is_valid():
+            client_serialized.save()
+            return Response(client_serialized.data)
+        return Response(client_serialized.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    if request.method == 'DELETE':
+        client.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    

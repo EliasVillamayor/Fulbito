@@ -12,28 +12,23 @@ class Payment(models.Model):
     ammount = models.DecimalField(null=False, max_digits=12, decimal_places=2)
     date = models.DateTimeField(auto_now_add=True, null=False)
     method = models.CharField(choices=[(pt.value, pt.name) for pt in PaymentType], null=False, max_length=100)
-    ##Reserva = id de la reserva, se agrega automaticamente por el onetoonefield
-    
+      
+class Team(models.Model):
+    name = models.CharField(max_length=100,null=False)
+    captain = models.CharField(max_length=50)
+
 class Tournament(models.Model):
     name = models.CharField(max_length=100,null=False)
     start_date = models.DateTimeField(null=False, auto_now_add=True)
     finish_date= models.DateField(null=False)
     status = models.CharField(choices=[(ts.value, ts.name) for ts in TournamentStatus],null=False, max_length=100)
+    teams = models.ManyToManyField(Team, related_name='tournaments')
    
-class Team(models.Model):
-    name = models.CharField(max_length=100,null=False)
-    captain = models.CharField(max_length=50)
-    tournament_id = models.ForeignKey(Tournament,null=False, on_delete=models.CASCADE, related_name='teams')
-   
-
 class Reserve(models.Model):
     client = models.CharField(default='client', null=False, max_length=50)
     reserve_date_time = models.DateTimeField(null=False)
-    status = models.CharField(choices=[(rs.value, rs.name) for rs in ReserveStatus],max_length=100)
     pitch = models.ForeignKey(Pitch, on_delete=models.CASCADE)
-    payment = models.OneToOneField(Payment, on_delete=models.CASCADE, related_name='payment')
-
-
+    payment = models.ForeignKey(Payment, on_delete=models.CASCADE, related_name='payment')
 
 class Match(models.Model):
     date = models.DateField()
@@ -41,6 +36,11 @@ class Match(models.Model):
     team_one = models.ForeignKey(Team, on_delete=models.CASCADE,null=False, related_name='match_team_one')
     team_two = models.ForeignKey(Team, on_delete=models.CASCADE,null=False,related_name='match_team_two')
     winner = models.ForeignKey(Team, on_delete=models.CASCADE,null=False,related_name='winner')
+
+class FrequentClient(models.Model):
+    name = models.CharField(max_length=50, null=False)
+    email = models.EmailField(null=False)
+    phone_number = models.CharField(max_length=20, null=False)
 
 
 

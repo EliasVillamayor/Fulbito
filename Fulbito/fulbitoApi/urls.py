@@ -24,7 +24,11 @@ urlpatterns = [
 
     path('reserves/', get_all_reserves, name='get_all_reserves'),
     path('reserve/<int:pk>/', reserve_detail, name='reserve_detail'),
-    path('reserve/create', create_reserve, name='create_reserve')
+    path('reserve/create', create_reserve, name='create_reserve'),
+
+    path('clients/', get_all_clients, name='get_all_clients'),
+    path('client/<int:pk>/', client_detail, name='client_detail'),
+    path('client/create', create_client, name='create_client')
 
     
 ]

@@ -2,7 +2,11 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+from dotenv import load_dotenv
 
+load_dotenv()
+
+MERCADOPAGO_ACCESS_TOKEN = os.getenv('MP_ACCESS_TOKEN')
 
 def main():
     """Run administrative tasks."""
