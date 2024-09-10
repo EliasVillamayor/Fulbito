@@ -307,3 +307,13 @@ def client_detail(request, pk):
         client.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
     
+
+
+
+############################################################
+
+#Metodo de recuperacion de data de mp desde el front
+@api_view(['POST'])
+def get_mp_data(request):
+    print("recibido")
+    

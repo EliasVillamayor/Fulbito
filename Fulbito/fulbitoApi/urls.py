@@ -28,7 +28,9 @@ urlpatterns = [
 
     path('clients/', get_all_clients, name='get_all_clients'),
     path('client/<int:pk>/', client_detail, name='client_detail'),
-    path('client/create', create_client, name='create_client')
+    path('client/create', create_client, name='create_client'),
+
+    path('payment/mp', get_mp_data, name='get_mp_data')
 
     
 ]
