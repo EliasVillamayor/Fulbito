@@ -1,3 +1,5 @@
+import json
+from django.http import HttpResponse
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -315,5 +317,20 @@ def client_detail(request, pk):
 #Metodo de recuperacion de data de mp desde el front
 @api_view(['POST'])
 def get_mp_data(request):
-    print("recibido")
-    
+    ##TAREAS:
+    ## 1- Chequear que sea transferencia
+    ## 2- Guardar el payment
+    ## 3 - Agregar el id del payment correspondiente a la reserva correspondiente
+
+
+    # Obtener el JSON de la notificación
+    notification_data = json.loads(request.body)
+
+
+    # Verificar si el tipo de evento es "transfer"
+    if notification_data['type'] == 'transfer':
+        # Procesar la transferencia
+        transfer_data = notification_data['data']
+        # ... (extraer y procesar los datos de la transferencia)
+
+    return HttpResponse('OK', status=200)

@@ -28,7 +28,7 @@ class Reserve(models.Model):
     client = models.CharField(default='client', null=False, max_length=50)
     reserve_date_time = models.DateTimeField(null=False)
     pitch = models.ForeignKey(Pitch, on_delete=models.CASCADE)
-    payment = models.ForeignKey(Payment, on_delete=models.CASCADE, related_name='payment')
+    status = models.CharField(choices=[(rs.value, rs.name) for rs in ReserveStatus], max_length=1)
 
 class Match(models.Model):
     date = models.DateField()

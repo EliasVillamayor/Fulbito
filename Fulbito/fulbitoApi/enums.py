@@ -18,7 +18,6 @@ class PitchStatus(Enum):
 class ReserveStatus(Enum):
     PENDING = 'Pendiente'
     CONFIRMED = 'Confirmada'
-    CANCELED = 'Cancelada'
 
 class PaymentType(Enum):
     CASH = 'Efectivo'
