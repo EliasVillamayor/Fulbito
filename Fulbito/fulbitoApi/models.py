@@ -28,7 +28,7 @@ class Reserve(models.Model):
     client = models.CharField(default='client', null=False, max_length=50)
     reserve_date_time = models.DateTimeField(null=False)
     pitch = models.ForeignKey(Pitch, on_delete=models.CASCADE)
-    status = models.CharField(choices=[(rs.value, rs.name) for rs in ReserveStatus], max_length=1)
+    status = models.CharField(choices=[(rs.value, rs.name) for rs in ReserveStatus], max_length=10, default='Pendiente')
 
 class Match(models.Model):
     date = models.DateField()
