@@ -11,6 +11,7 @@ class ReserveSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reserve
         fields = ('__all__')
+        depth = 1
 
 class PaymentSerializer(serializers.ModelSerializer):
     class Meta:
